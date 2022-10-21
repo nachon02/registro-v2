@@ -55,8 +55,12 @@
               </div>
             </div>
             <div class="col-sm-12">
-              <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
-                data-bs-target="#termServices">Términos del servicio</button>
+              <a id="modalLink" href="#" class="btn-link ps-0" data-bs-toggle="modal"
+                data-bs-target="#termServices">Términos del
+                servicio</a>
+              <div class="invalid-feedback" id="termServError">
+                Debe ingresar un nombre.
+              </div>
             </div>
 
 
@@ -73,6 +77,7 @@
             <div class="modal-header borde-btm">
               <h5 class="modal-title fw-bold" id="exampleModalLabel">Términos y condiciones de servicio.</h5>
 
+
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
             </div>
@@ -87,13 +92,10 @@
             <div class="modal-footer">
 
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <input class="form-check-input" type="checkbox" value="" id="termCheck" required>
                 <label class="form-check-label" for="invalidCheck">
-                  Agree to terms and conditions
+                  Acepto los terminos y condiciones del servicio.
                 </label>
-                <div class="invalid-feedback">
-                  You must agree before submitting.
-                </div>
               </div>
 
 

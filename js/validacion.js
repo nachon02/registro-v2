@@ -1,27 +1,10 @@
-// (function () {
-// 	"use strict";
-// 	let forms = document.querySelectorAll(".needs-validation");
-// 	Array.prototype.slice.call(forms).forEach(function (form) {
-// 		form.addEventListener(
-// 			"submit",
-// 			function (event) {
-// 				if (!form.checkValidity()) {
-// 					event.preventDefault();
-// 					event.stopPropagation();
-// 				}
-
-// 				form.classList.add("was-validated");
-// 			},
-// 			false
-// 		);
-// 	});
-// })();
-
 const contraseña1 = document.getElementById("password1");
 const contraseña2 = document.getElementById("password2");
 const nombre = document.getElementById("nombre");
 const apellido = document.getElementById("apellido");
 const mail = document.getElementById("email");
+const termCheck = document.getElementById("termCheck");
+const modalLink = document.getElementById("modalLink");
 const caracterMail = (e) => {
 	return /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(
 		e
@@ -42,7 +25,8 @@ function validar(el, tipo = "error") {
 	}
 }
 
-btn.addEventListener("click", () => {
+btn.addEventListener("click", (e) => {
+	e.preventDefault;
 	if (contraseña1.value.trim() != "" && contraseña1.value.length >= 6) {
 		validar(contraseña1, "c");
 	} else {
@@ -68,5 +52,16 @@ btn.addEventListener("click", () => {
 		validar(mail, "c");
 	} else {
 		validar(mail);
+	}
+	if (!termCheck.checked) {
+		termCheck.classList.remove("is-valid");
+		termCheck.classList.add("is-invalid");
+		modalLink.classList.add("link-danger");
+		document.getElementById("termServError").classList.add("d-inline");
+	} else {
+		termCheck.classList.add("is-valid");
+		termCheck.classList.remove("is-invalid");
+		modalLink.classList.remove("link-danger");
+		document.getElementById("termServError").classList.remove("d-inline");
 	}
 });
