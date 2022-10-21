@@ -10,6 +10,9 @@ const caracterMail = (e) => {
 		e
 	);
 };
+const onlyLetters = (e) => {
+	return /^[A-Z]+$/i.test(e);
+};
 
 const btn = document.getElementById("btn");
 
@@ -26,30 +29,45 @@ function validar(el, tipo = "error") {
 }
 
 btn.addEventListener("click", (e) => {
-	e.preventDefault;
+	e.preventDefault();
+	e.stopPropagation();
+	let valid = 0;
 	if (contraseña1.value.trim() != "" && contraseña1.value.length >= 6) {
 		validar(contraseña1, "c");
+		valid++;
 	} else {
 		validar(contraseña1);
 	}
 	if (contraseña2.value.trim() != "" && contraseña1.value == contraseña2.value && contraseña1.value.length >= 6) {
 		validar(contraseña2, "c");
+		valid++;
 	} else {
 		validar(contraseña2);
 	}
 
 	if (nombre.value.trim() != "") {
 		validar(nombre, "c");
+		valid++;
+		if (!onlyLetters(nombre.value)) {
+			document.getElementById("nameFback").textContent = "El nombre no puede contener números ni espacios";
+			validar(nombre);
+		}
 	} else {
 		validar(nombre);
 	}
 	if (apellido.value.trim() != "") {
 		validar(apellido, "c");
+		valid++;
+		if (!onlyLetters(apellido.value)) {
+			document.getElementById("lastNameFback").textContent = "El apellido no puede contener números";
+			validar(apellido);
+		}
 	} else {
 		validar(apellido);
 	}
 	if (mail.value.trim() != "" && caracterMail(mail.value)) {
 		validar(mail, "c");
+		valid++;
 	} else {
 		validar(mail);
 	}
@@ -63,5 +81,8 @@ btn.addEventListener("click", (e) => {
 		termCheck.classList.remove("is-invalid");
 		modalLink.classList.remove("link-danger");
 		document.getElementById("termServError").classList.remove("d-inline");
+	}
+	if (valid == 5) {
+		console.log("El usuario fue registrado correctamente");
 	}
 });
