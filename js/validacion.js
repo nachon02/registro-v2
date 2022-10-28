@@ -5,6 +5,8 @@ const apellido = document.getElementById("apellido");
 const mail = document.getElementById("email");
 const termCheck = document.getElementById("termCheck");
 const modalLink = document.getElementById("modalLink");
+let inputs = document.getElementsByTagName("input");
+let ok = false;
 const caracterMail = (e) => {
 	return /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(
 		e
@@ -28,9 +30,7 @@ function validar(el, tipo = "error") {
 	}
 }
 
-btn.addEventListener("click", (e) => {
-	e.preventDefault();
-	e.stopPropagation();
+function validForm() {
 	let valid = 0;
 	if (contraseña1.value.trim() != "" && contraseña1.value.length >= 6) {
 		validar(contraseña1, "c");
@@ -83,6 +83,21 @@ btn.addEventListener("click", (e) => {
 		document.getElementById("termServError").classList.remove("d-inline");
 	}
 	if (valid == 5) {
-		console.log("El usuario fue registrado correctamente");
+		console.log("Formulario valido");
 	}
+}
+
+btn.addEventListener("click", (e) => {
+	e.preventDefault();
+	e.stopPropagation();
+	validForm();
+	ok = true;
 });
+
+for (const input of inputs) {
+	input.addEventListener("input", () => {
+		if (ok) {
+			validForm();
+		}
+	});
+}
